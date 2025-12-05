@@ -1,0 +1,1 @@
+# ai-cybozu-plugin-template
