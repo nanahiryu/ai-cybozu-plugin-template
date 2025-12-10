@@ -1,0 +1,25 @@
+{
+  "manifest_version": 1,
+  "version": "1.0.0",
+  "type": "APP",
+  "icon": "image/icon.png",
+  "desktop": {
+    "js": ["dist/desktop.js"]
+  },
+  "config": {
+    "html": "html/config.html",
+    "js": ["dist/config.js"]
+  },
+  "name": {
+    "en": "AI Cybozu Plugin Template",
+    "ja": "AI Cybozu プラグイン テンプレート"
+  },
+  "description": {
+    "en": "AI Cybozu Plugin Template",
+    "ja": "AI Cybozu プラグイン テンプレート"
+  },
+  "homepage_url": {
+    "en": "https://github.com/ai-cybozu/ai-cybozu-plugin-template",
+    "ja": "https://github.com/ai-cybozu/ai-cybozu-plugin-template"
+  }
+}
