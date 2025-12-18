@@ -23,8 +23,6 @@
   "devDependencies": {
     "@kintone/cli": "^1.16.1",
     "@kintone/dts-gen": "^9.0.0",
-    "@kintone/plugin-packer": "^9.0.0",
-    "@kintone/plugin-uploader": "^10.0.0",
     "@types/node": "^25.0.1",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
