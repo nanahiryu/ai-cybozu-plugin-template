@@ -1,2 +1,4 @@
 node_modules
 plugin/js/
+dist/
+.env

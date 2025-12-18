@@ -4,11 +4,11 @@
   "type": "APP",
   "icon": "image/icon.png",
   "desktop": {
-    "js": ["dist/desktop.js"]
+    "js": ["js/desktop.js"]
   },
   "config": {
     "html": "html/config.html",
-    "js": ["dist/config.js"]
+    "js": ["js/config.js"]
   },
   "name": {
     "en": "AI Cybozu Plugin Template",
