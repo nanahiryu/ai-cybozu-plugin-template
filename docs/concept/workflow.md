@@ -26,6 +26,16 @@ AI エージェントと共に、漠然としたアイデアを具体的な仕�
 - **プラグイン設定**: ユーザーが設定画面で何を入力する必要があるか。
 - **kintone アプリ設計**: プラグイン動作のために新しいフィールドや別アプリが必要か。
 
+アプリが作成されていない場合はこのステップでアプリを作成しましょう
+
+1. `scritps/kintone-app/{kintoneアプリを表す英名}.json`にフィールド情報を作成
+   - https://cybozu.dev/ja/kintone/docs/rest-api/apps/form/add-form-fields/のpropertiesを参考に作成
+2. 以下コマンドで kintone 環境にアプリを作成
+
+```bash
+pnpm create-kintone-app "{アプリ名}" "{scripts/kintone-app/のjsonファイル名(拡張子なし)}"
+```
+
 ### 4. Handler 設計
 
 - kintone のどのイベントをフックするか

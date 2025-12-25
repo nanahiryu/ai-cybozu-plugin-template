@@ -11,7 +11,8 @@
     "upload": "source ./.env && cli-kintone plugin upload --input ./dist/plugin.zip --base-url $BASE_URL --username $USERNAME --password $PASSWORD",
     "deploy": "pnpm build && pnpm package && pnpm upload",
     "gen-ppk": "cli-kintone plugin keygen --output ./key/private.ppk",
-    "lint": "biome check"
+    "lint": "biome check",
+    "create-kintone-app": "tsx --env-file .env ./scripts/create-kintone-app.ts"
   },
   "license": "ISC",
   "packageManager": "pnpm@10.18.3",

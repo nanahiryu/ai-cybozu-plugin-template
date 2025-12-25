@@ -1,0 +1,7 @@
+{
+  "name": {
+    "type": "SINGLE_LINE_TEXT",
+    "code": "name",
+    "label": "名前"
+  }
+}
