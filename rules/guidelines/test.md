@@ -30,6 +30,25 @@
 
 - kintone 標準の機能についてはテストしないことを意識する
 
+## E2E テスト環境
+
+### 環境変数の読み込み
+
+テストヘルパーや config では必ず以下を実装:
+
+```typescript
+import dotenv from "dotenv";
+dotenv.config();
+
+if (!process.env.BASE_URL || !process.env.USERNAME || !process.env.PASSWORD) {
+  throw new Error("Environment variables are not set");
+}
+```
+
+### kintone ログインの実装
+
+kintone のログインヘルパー実装は `tests/e2e/helpers/auth.ts` を参照してください。
+
 ## テスト実装中の注意
 
 - テストコードは常に通るようにしてください。実装がまだ行われておらず、通らないテストがある場合にはライブラリ固有の機能などを利用し、skip するようにしてください。
