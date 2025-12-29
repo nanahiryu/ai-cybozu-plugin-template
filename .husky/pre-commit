@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Lintチェック
+echo "Running lint..."
+pnpm lint
+
+# Lint失敗時はコミットを中止
+if [ $? -ne 0 ]; then
+  echo "❌ Lint failed. Please fix the errors before committing."
+  exit 1
+fi
