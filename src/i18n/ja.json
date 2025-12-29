@@ -1,0 +1,10 @@
+{
+  "config": {
+    "title": "プラグイン設定",
+    "save": "保存",
+    "cancel": "キャンセル"
+  },
+  "errors": {
+    "saveFailed": "設定の保存に失敗しました"
+  }
+}

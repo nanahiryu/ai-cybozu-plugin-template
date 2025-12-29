@@ -30,6 +30,45 @@
 
 - kintone 標準の機能についてはテストしないことを意識する
 
+#### 環境変数の読み込み
+
+テストヘルパーや config では必ず以下を実装:
+
+```typescript
+import dotenv from "dotenv";
+dotenv.config();
+
+if (!process.env.BASE_URL || !process.env.USERNAME || !process.env.PASSWORD) {
+  throw new Error("Environment variables are not set");
+}
+```
+
+#### kintone ログインの実装
+
+kintone のログインヘルパー実装は `tests/e2e/helpers/auth.ts` を参照してください。
+
 ## テスト実装中の注意
 
 - テストコードは常に通るようにしてください。実装がまだ行われておらず、通らないテストがある場合にはライブラリ固有の機能などを利用し、skip するようにしてください。
+
+### skip の使い方
+
+実装前のテストは `test.describe.skip()` でスキップし、実装完了後に `.skip` を削除してください。
+
+例: describe 単位で skip
+
+```typescript
+// 実装前
+test.describe.skip("プラグイン設定画面", () => {
+  test("設定が保存される", async ({ page }) => {
+    // テストコード
+  });
+});
+
+// 実装後 - .skip を削除
+test.describe("プラグイン設定画面", () => {
+  test("設定が保存される", async ({ page }) => {
+    // テストコード
+  });
+});
+```

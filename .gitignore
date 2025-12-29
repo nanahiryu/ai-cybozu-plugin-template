@@ -3,3 +3,6 @@ plugin/js/
 dist/
 .env
 key/private.ppk
+test-results/
+playwright-report/
+playwright/.cache/
