@@ -25,7 +25,8 @@ GitHub Issues として課題を作成します。
 ### 4. 実装 (subagent を利用)
 
 1. ブランチ作成: `git switch -c feature/xxx`
-2. 小さい単位で「実装 → テスト実行 → コミット」を繰り返す
+2. 実装が進むたびに実装箇所の handler のテストの skip を削除していく
+3. 小さい単位で「実装 → テスト実行 → コミット」を繰り返す
 
 ### 5. デプロイ (手動)
 
@@ -43,42 +44,10 @@ GitHub Issues として課題を作成します。
 
 ### Pre-commit hook (Husky)
 
-コミット前にLintを自動実行するため、Huskyを使用します。
-セットアップ方法は以下の通りです：
-
-```bash
-pnpm add -D husky
-pnpm exec husky init
-```
-
-`.husky/pre-commit` ファイル:
-
-```bash
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
-# Lintチェック
-echo "Running lint..."
-pnpm lint
-
-# Lint失敗時はコミットを中止
-if [ $? -ne 0 ]; then
-  echo "❌ Lint failed. Please fix the errors before committing."
-  exit 1
-fi
-```
-
-`package.json` に以下を追加:
-
-```json
-{
-  "scripts": {
-    "prepare": "husky install"
-  }
-}
-```
+コミット前に Lint を自動実行するため、Husky を使用します。
+詳細は `.husky/pre-commit` を参照してください。
 
 ### GitHub Actions CI/CD
 
-`.github/workflows/test.yml` でLintとテストを自動実行します。
+`.github/workflows/test.yml` で Lint とテストを自動実行します。
 詳細は `.github/workflows/test.yml` を参照してください。
