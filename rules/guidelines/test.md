@@ -30,9 +30,7 @@
 
 - kintone 標準の機能についてはテストしないことを意識する
 
-## E2E テスト環境
-
-### 環境変数の読み込み
+#### 環境変数の読み込み
 
 テストヘルパーや config では必ず以下を実装:
 
@@ -45,7 +43,7 @@ if (!process.env.BASE_URL || !process.env.USERNAME || !process.env.PASSWORD) {
 }
 ```
 
-### kintone ログインの実装
+#### kintone ログインの実装
 
 kintone のログインヘルパー実装は `tests/e2e/helpers/auth.ts` を参照してください。
 
@@ -53,11 +51,11 @@ kintone のログインヘルパー実装は `tests/e2e/helpers/auth.ts` を参�
 
 - テストコードは常に通るようにしてください。実装がまだ行われておらず、通らないテストがある場合にはライブラリ固有の機能などを利用し、skip するようにしてください。
 
-### skipの使い方
+### skip の使い方
 
 実装前のテストは `test.describe.skip()` でスキップし、実装完了後に `.skip` を削除してください。
 
-**良い例: describe単位でskip**
+例: describe 単位で skip
 
 ```typescript
 // 実装前
@@ -74,5 +72,3 @@ test.describe("プラグイン設定画面", () => {
   });
 });
 ```
-
-**理由**: CIでのテスト実行が常に成功状態を保て、どのテストが実装待ちか一目でわかる
