@@ -30,3 +30,25 @@ kintone オブジェクト（`kintone.events`, `kintone.api`, `kintone.app` な�
 - イベントハンドラが `event` オブジェクトを return しているか
 - フィールド値の取得・設定が `event.record` を使っているか
 - kintone API の使用方法が公式ドキュメントに準拠しているか
+
+## 実装Tips
+
+### ファイル操作
+
+#### ファイルダウンロードの手順
+
+ファイルダウンロードは2つの手順が必要です：
+
+1. **レコード情報から `fileKey` を取得する**
+2. **`fileKey` を使ってファイルをダウンロードする**
+
+#### 重要な注意点
+
+- `kintone.api()` はファイルダウンロードAPIでは使用できません
+- `kintone.api.urlForGet()` を使ってダウンロードURLを生成します
+- `fileKey` は配列のインデックスを指定して取得します
+
+#### 参考ドキュメント
+
+- [ファイルをダウンロードする](https://cybozu.dev/ja/kintone/docs/rest-api/files/download-file/)
+- [ファイルダウンロードで必須となる2つの手順](https://cybozu.dev/ja/kintone/tips/development/customize/file/steps-download-files/)
