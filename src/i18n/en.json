@@ -1,0 +1,10 @@
+{
+  "config": {
+    "title": "Plugin Settings",
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "errors": {
+    "saveFailed": "Failed to save settings"
+  }
+}
