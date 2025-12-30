@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm test)",
+      "Bash(pnpm test:*)",
+      "Bash(pnpm vitest:*)",
+      "Bash(pnpm exec tsc --noEmit)",
+      "Bash(pnpm lint)",
+      "Bash(pnpm add -D :*)",
+
+      "Bash(git status)",
+      "Bash(git branch:*)",
+      "Bash(git log:*)",
+      "Bash(git diff:*)",
+      "Bash(git merge-base:*)",
+
+      "Bash(ls -la:*)",
+      "Bash(pwd)",
+
+      "Bash(git stash push:*)",
+      "Bash(git stash pop)",
+      "Bash(git checkout -b feature/:*)",
+      "Bash(git checkout -b fix/:*)",
+
+      "WebFetch",
+      "WebSearch"
+    ],
+    "deny": [
+      "Bash(rm :*)",
+      "Bash(rm -rf:*)",
+      "Bash(curl :*)",
+      "Bash(wget :*)",
+      "Read(./.env)",
+      "Read(./secrets/**/*)"
+    ]
+  }
+}
