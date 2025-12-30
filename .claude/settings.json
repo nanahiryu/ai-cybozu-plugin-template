@@ -1,6 +1,7 @@
 {
   "permissions": {
     "allow": [
+      "Bash(pnpm test)",
       "Bash(pnpm test:*)",
       "Bash(pnpm vitest:*)",
       "Bash(pnpm exec tsc --noEmit)",
