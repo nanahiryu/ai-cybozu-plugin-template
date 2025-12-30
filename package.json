@@ -1,8 +1,29 @@
 {
-  "name": "ai-cybozu-plugin-template",
+  "name": "@nanahiryu/create-ai-kintone-plugin",
   "version": "1.0.0",
-  "description": "",
+  "description": "kintone plugin template for AI-assisted development",
   "main": "index.js",
+  "bin": {
+    "create-ai-kintone-plugin": "bin/cli.js"
+  },
+  "files": [
+    ".claude",
+    ".github",
+    ".husky",
+    "bin",
+    "plugin",
+    "rules",
+    "scripts",
+    "src",
+    "tests",
+    ".env.example",
+    ".gitignore",
+    "biome.json",
+    "CLAUDE.md",
+    "README.md",
+    "tsconfig.json",
+    "vite.config.ts"
+  ],
   "scripts": {
     "test": "vitest --passWithNoTests",
     "test:e2e": "playwright test",
