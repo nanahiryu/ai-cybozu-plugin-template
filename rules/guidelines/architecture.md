@@ -10,7 +10,7 @@ src/
   ├── hooks/              # ページごと, または複数ページで利用するUIロジック・状態管理
   ├── functions/
   │   ├── domain/         # Domain Layer: 純粋なビジネスロジック
-  │   ├── use-cases/      # 複雑化した場合のビジネスロジック（基本的には作成しない）
+  │   ├── usecases/       # domain/, infra/ を呼び出すオーケストレーション関数（基本的には作成しない）
   │   ├── infra/          # Infra Layer: kintone API
   │   └── handlers/       # Handler Layer: kintone イベントハンドラ登録のみ
   └── pages/              # Entry Points
@@ -22,9 +22,9 @@ src/
 - `ui` → `domain` のみ
 - `pages` → `ui`, `hooks`
 - `infra` → `domain` のみ
-- `hooks` → `use-cases`, `domain`, `infra`
+- `hooks` → `usecases`, `domain`, `infra`
 - `handlers` → `domain`, `infra`
-- `use-cases` → `domain`, `infra`
+- `usecases` → `domain`, `infra`
 
 ## 各層の責務
 
@@ -35,14 +35,21 @@ src/
 kintone イベントハンドラ（`app.record.detail.show` など）の登録のみを行う。
 UI 構築やビジネスロジック, 外部への副作用は他の層に委譲する。
 
-#### use-cases
+#### usecases
 
-コードの粒度としては handlers/と同等。
-ロジック実装は禁止。
+domain/ と infra/ を組み合わせて呼び出すオーケストレーション関数を配置する。
+
+使用例：
+- UIイベント（onClick等）から呼び出されるヘビーな処理
+- 複数の domain 関数と infra 関数を組み合わせる処理
+
+注意：
+- ロジック実装は domain/ に委譲し、usecases/ では組み合わせのみ行う
+- 単純な処理は hooks/ や handlers/ から直接 domain/infra/ を呼んでよい
 
 ### hooks
 
-ページごとの UI ロジック・状態管理を行う。onClick などの UI イベント処理を記載する。処理が極端に複雑化(1 関数の処理が 100 行以上)したり、他のページでも利用する一連の処理が出てきた場合は `use-cases` に切り出す。
+ページごとの UI ロジック・状態管理を行う。onClick などの UI イベント処理を記載する。処理が極端に複雑化(1 関数の処理が 100 行以上)したり、他のページでも利用する一連の処理が出てきた場合は `usecases` に切り出す。
 
 ### components
 
