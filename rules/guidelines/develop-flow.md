@@ -14,7 +14,7 @@ pnpm install
 
 ### 1. 計画を立てる (`/plan`)
 
-1. `.working/PLAN_{timestamp}.md` に計画を記載
+1. `.working/PLAN_{yyyymmdd}_{hhmmss}.md` に計画を記載
 2. ブランチ作成: `git switch -c feature/plan`
 3. コミット: 計画ファイルのみ
 

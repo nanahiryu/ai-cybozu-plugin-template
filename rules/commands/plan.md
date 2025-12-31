@@ -7,6 +7,10 @@ kintone API のエンドポイント、イベント、フィールドタイプ�
 
 ---
 
+## 出力
+
+計画は `.working/PLAN_{yyyymmdd}_{hhmmss}.md` に出力してください。
+
 ## Phase 1: Planning（設計）
 
 ### Step 1: kintone アプリ構成の取得
@@ -32,6 +36,4 @@ kintone API のエンドポイント、イベント、フィールドタイプ�
 
 ユースケースを元にプラグインの設計を行なってください
 
-### Step 4: テスト設計
-
-- E2E / Integration(handler) テスト仕様を策定
+**Note**: テスト設計は `/design-test` コマンドで行います。
