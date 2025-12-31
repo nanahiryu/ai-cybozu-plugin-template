@@ -8,7 +8,7 @@
     "test:unit": "vitest run --project unit --passWithNoTests",
     "test:integration": "vitest run --project integration --passWithNoTests",
     "test:e2e": "playwright test --pass-with-no-tests",
-    "build": "vite build",
+    "build": " BUILD_TARGET=desktop vite build && BUILD_TARGET=config vite build",
     "dev": "vite build --watch",
     "package": "cli-kintone plugin pack --input ./plugin/manifest.json --output ./dist/plugin.zip --private-key ./key/private.ppk",
     "upload": "source ./.env && cli-kintone plugin upload --input ./dist/plugin.zip --base-url $BASE_URL --username $USERNAME --password $PASSWORD",
