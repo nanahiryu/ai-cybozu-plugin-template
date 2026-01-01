@@ -12,15 +12,23 @@
       "Bash(git branch:*)",
       "Bash(git log:*)",
       "Bash(git diff:*)",
-      "Bash(git merge-base:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git switch:*)",
+      "Bash(git restore:*)",
 
       "Bash(ls -la:*)",
       "Bash(pwd)",
 
       "Bash(git stash push:*)",
       "Bash(git stash pop)",
-      "Bash(git checkout -b feature/:*)",
-      "Bash(git checkout -b fix/:*)",
+
+      "Bash(gh issue view:*)",
+      "Bash(gh issue list:*)",
+      "Bash(gh issue create:*)",
+      "Bash(gh issue close:*)",
+      "Bash(gh pr list:*)",
+      "Bash(gh pr view:*)",
 
       "WebFetch",
       "WebSearch"

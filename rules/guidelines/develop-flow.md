@@ -1,14 +1,57 @@
 # 開発フロー
 
+## セットアップ
+
+開発を開始する前に、以下を実行してください：
+
+```bash
+pnpm install
+```
+
+これにより依存関係がインストールされ、Husky の pre-commit hook も設定されます。
+
+## プラグイン開発の着手からリリースまでのフロー
+
+### 最もシンプルなフロー
+
+1. 仕様書を作成する(`/create-spec`)
+2. 課題を作成する(`/issue`)
+3. テストの設計と実装を行う(`/design-test`)
+4. issue ベースで実装用のプランを行う(`/plan`)
+5. 実装を行う(`/do-plan`)
+6. テスト実行を行う(`/qa`)
+
+### 修正を伴う際のフロー
+
+1. 仕様書を作成する(`/create-spec`)
+2. 課題を作成する(`/issue`)
+3. テストの設計と実装を行う(`/design-test`)
+4. issue ベースで実装用のプランを行う(`/plan`)
+5. 実装を行う(`/do-plan`)
+6. テスト実行を行う(`/qa`)
+7. テストが通らない場合は課題を作成し直す(`/issue`)
+8. 実装のプランを行う(`/plan`)
+9. 実装を行う(`/do-plan`)
+10. テスト実行を行う(`/qa`)
+11. 7~10 を繰り返す
+
 ## 各フェーズの詳細手順
 
-### 1. 計画を立てる (`/plan`)
+### 仕様書を作成する (`/create-spec`)
 
-1. `.working/PLAN_{timestamp}.md` に計画を記載
-2. ブランチ作成: `git switch -c feature/plan`
-3. コミット: 計画ファイルのみ
+1. `/docs/spec/` に仕様書を記載
+2. ブランチ作成: `git switch -c feature/create-spec`
+3. コミット: 仕様書ファイルのみ
+4. PR 作成
 
-### 2. E2E, Integration テストを書く (`/design-test`)
+### 課題を作成する (`/issue`)
+
+1. GitHub Issues として課題を作成
+2. ブランチ作成: `git switch -c feature/issue`
+3. コミット: 課題ファイルのみ
+4. PR 作成
+
+### E2E, Integration テストを書く (`/design-test`)
 
 1. ブランチ作成: `git switch -c feature/design-test`
 2. テスト環境セットアップ
@@ -17,27 +60,33 @@
 5. E2E その他テスト実装（skip 状態）
 6. テスト実行
 7. コミット
+8. PR 作成
 
-### 3. Issue を作成 (`/issue`)
+### 計画を立てる (`/plan`)
 
-GitHub Issues として課題を作成します。
+1. `.working/PLAN_{yyyymmdd}_{hhmmss}.md` に計画を記載
+2. ブランチ作成: `git switch -c plan/{short-description}`
+3. コミット: 計画ファイルのみ
+4. PR 作成
 
-### 4. 実装 (subagent を利用)
+### 実装を行う (`/do-plan`)
 
-1. ブランチ作成: `git switch -c feature/xxx`
+1. ブランチ作成: `git switch -c feature/{short-description}`
 2. 実装が進むたびに実装箇所の handler のテストの skip を削除していく
 3. 小さい単位で「実装 → テスト実行 → コミット」を繰り返す
 
-### 5. デプロイ (手動)
+### デプロイ (手動)
 
-`pnpm deploy` コマンドでデプロイします。
+`pnpm run deploy` コマンドでデプロイします。
 
 ## コミット前の必須確認
 
 以下を必ず確認してからコミットしてください：
 
-- テスト実行済み: `pnpm test`, `pnpm test:e2e`
+- テスト実行済み: `pnpm test`
 - Lint 確認: `pnpm lint`
+- 型チェック: `pnpm exec tsc --noEmit`
+- ビルド成功: `pnpm build`
 - 不要なファイルがないか: `git status`
 
 ## 自動化

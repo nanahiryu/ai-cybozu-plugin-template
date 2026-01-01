@@ -1,37 +1,27 @@
-# /plan - kintone プラグイン開発計画
+# /plan - issue ベースで実装用のプランを行う
 
-設計を行うコマンド
-
-**📚 重要**: 実装時は `rules/guidelines/kintone-api-reference.md` を参照してください。
-kintone API のエンドポイント、イベント、フィールドタイプ、サンプルコードなどが記載されています。
+issue ベースで実装用のプランを行うコマンド
 
 ---
 
-## Phase 1: Planning（設計）
+## 入力
 
-### Step 1: kintone アプリ構成の取得
+- issue 番号が 1 つ以上渡されます
 
-**参照**: `rules/guidelines/kintone-api-reference.md` の「Phase 1: Planning」セクション
+## 出力
 
-- 既存のアプリを利用してプラグインの開発を行うかを質問してください
-- すでにアプリが存在する場合は、.env ファイルが記入済みか確認し、記入済みであればアプリ構成を取得してください
+計画は `.working/PLAN_{yyyymmdd}_{hhmmss}.md` に出力してください。
 
-**使用する API**:
+## 実行タスク
 
-- アプリ情報取得: `GET /k/v1/app.json`
-- フィールド情報取得: `GET /k/v1/app/form/fields.json`
+### issue の内容を確認
 
-詳細は kintone-api-reference.md を参照してください。
+- issue の内容を確認してください
 
-### Step 2: ユースケースのヒアリング
+```sh
+gh issue view <issue-number>
+```
 
-- ユーザーは誰か
-- "{user} が {action} することができる"の形式でユースケースを整理してください
+### 実行する流れを整理し、実装のプランを行なってください
 
-### Step 3: 設計
-
-ユースケースを元にプラグインの設計を行なってください
-
-### Step 4: テスト設計
-
-- E2E / Integration(handler) テスト仕様を策定
+- issue の内容を確認しつつ、依存関係を整理し、実行する流れを整理してください

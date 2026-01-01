@@ -1,5 +1,4 @@
 ---
-allowed-tools:
 description: テスト設計&実装を行うコマンド
 ---
 

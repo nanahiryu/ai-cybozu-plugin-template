@@ -1,6 +1,5 @@
 ---
-allowed-tools:
-description: kintone プラグイン開発計画を行うコマンド
+description: issue ベースで実装用のプランを行うコマンド
 ---
 
 # /plan - kintone プラグイン開発計画
@@ -14,5 +13,5 @@ description: kintone プラグイン開発計画を行うコマンド
 
 ## タスク
 
-このコマンドは、kintone プラグインの設計から実装までの全フローをガイドします。
+このコマンドは、issue ベースで実装用のプランを行うコマンドです。
 詳細な手順は実体ファイルを参照してください。

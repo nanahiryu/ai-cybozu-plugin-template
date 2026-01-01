@@ -1,5 +1,4 @@
 ---
-allowed-tools:
 description: 実装完了後、テストを実行し品質の保証を行う
 ---
 
