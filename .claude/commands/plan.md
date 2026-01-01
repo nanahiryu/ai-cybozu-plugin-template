@@ -1,5 +1,4 @@
 ---
-allowed-tools:
 description: kintone プラグイン開発計画を行うコマンド
 ---
 

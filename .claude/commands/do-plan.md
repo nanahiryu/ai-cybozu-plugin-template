@@ -1,5 +1,4 @@
 ---
-allowed-tools:
 description: プランに従って実装を行うコマンド
 ---
 
