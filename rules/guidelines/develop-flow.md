@@ -17,6 +17,7 @@ pnpm install
 1. `.working/PLAN_{yyyymmdd}_{hhmmss}.md` に計画を記載
 2. ブランチ作成: `git switch -c feature/plan`
 3. コミット: 計画ファイルのみ
+4. PR 作成
 
 ### 2. E2E, Integration テストを書く (`/design-test`)
 
@@ -27,6 +28,7 @@ pnpm install
 5. E2E その他テスト実装（skip 状態）
 6. テスト実行
 7. コミット
+8. PR 作成
 
 ### 3. Issue を作成 (`/issue`)
 
@@ -46,8 +48,10 @@ GitHub Issues として課題を作成します。
 
 以下を必ず確認してからコミットしてください：
 
-- テスト実行済み: `pnpm test`, `pnpm test:e2e`
+- テスト実行済み: `pnpm test`
 - Lint 確認: `pnpm lint`
+- 型チェック: `pnpm exec tsc --noEmit`
+- ビルド成功: `pnpm build`
 - 不要なファイルがないか: `git status`
 
 ## 自動化
