@@ -1,5 +1,6 @@
 ---
 description: プランに従って実装を行うコマンド
+argument-hint: <PLAN_xxx.md>
 ---
 
 # /do-plan - プランに従って実装を行うコマンド
