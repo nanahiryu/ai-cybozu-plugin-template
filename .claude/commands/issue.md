@@ -1,5 +1,4 @@
 ---
-allowed-tools:
 description: GitHub Issue 作成支援を行うコマンド
 ---
 
