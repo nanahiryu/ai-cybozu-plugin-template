@@ -19,3 +19,7 @@
 - 単体テストの実装がテスト方針（@rules/guidelines/test.md）に沿っているか
 - コードがコーディング規約（@rules/guidelines/coding-rules.md）に沿っているか
 - コードがアーキテクチャ（@rules/guidelines/architecture.md）に沿っているか
+  - infra/, domain/, handler/, components/の依存関係は適切か
+  - domain/で kintone オブジェクトにアクセスしていたり、その他外部 API を呼び出していないか
+  - ui/でロジックを実装していないか
+  - ui/で複数の UI コンポーネントを束ねた複雑かつ汎用性の低い UI コンポーネントを実装していないか
