@@ -34,5 +34,24 @@ kintone API のエンドポイント、イベント、フィールドタイプ�
 ## Step 3: 設計
 
 ユースケースを元にプラグインの設計を行なってください
+仕様書は`rules/templates/spec/`のテンプレートを利用して作成してください
+
+### テンプレートのディレクトリ構成
+
+- `rules/templates/spec/concept.md`
+- `rules/templates/spec/requirements.md`
+- `rules/templates/spec/kintone-app.md`
+- `rules/templates/spec/plugin-config.md`
+- `rules/templates/spec/usecase-detail.md`
+
+### 仕様書のディレクトリ構成
+
+- `docs/spec/`
+  - `concept.md`
+  - `requirements.md`
+  - `kintone-app.md`
+  - `plugin-config.md`
+  - `usecases/`
+    - `{ユースケース名}.md`
 
 **Note**: テスト設計は `/design-test` コマンドで行います。
