@@ -35,15 +35,38 @@ src/
 kintone イベントハンドラ（`app.record.detail.show` など）の登録のみを行う。
 UI 構築やビジネスロジック, 外部への副作用は他の層に委譲する。
 
+**注意**: プラグイン設定画面など kintone イベントを使わない画面では handlers/ は不要。
+UI コンポーネントから直接 infra/ を呼び出してよい。
+
+#### infra
+
+kintone API, その他外部 API を呼び出す関数を配置する。
+
+**ファイル構成ルール**:
+
+- 1 関数 1 ファイルを原則とする
+- ファイル名は関数名と一致させる
+
+例:
+
+```
+infra/
+  ├── fetchAttachmentFields.ts
+  ├── getPluginConfig.ts
+  └── savePluginConfig.ts
+```
+
 #### usecases
 
 domain/ と infra/ を組み合わせて呼び出すオーケストレーション関数を配置する。
 
 使用例：
-- UIイベント（onClick等）から呼び出されるヘビーな処理
+
+- UI イベント（onClick 等）から呼び出されるヘビーな処理
 - 複数の domain 関数と infra 関数を組み合わせる処理
 
 注意：
+
 - ロジック実装は domain/ に委譲し、usecases/ では組み合わせのみ行う
 - 単純な処理は hooks/ や handlers/ から直接 domain/infra/ を呼んでよい
 
@@ -53,14 +76,23 @@ domain/ と infra/ を組み合わせて呼び出すオーケストレーショ�
 
 ### components
 
-### ui
+#### ui
 
-共通利用するような UI コンポーネントを作成する。
+複数画面で再利用可能な汎用 UI コンポーネントを作成する。
 onClick などの UI イベント処理は基本的には記載せず、props で受け取る。
+
+例: Checkbox, Button, FieldSelector など
 
 ### pages
 
-ページごとの UI を作成する。
+特定画面専用のコンポーネントを作成する。
 ページごとの ロジック・状態管理は hooks に委譲する。
+
+例: ConfigForm, RecordDetail など
+
+### ui/ と pages/ の判断基準
+
+- **ui/**: 他の画面でも使い回せる汎用コンポーネント
+- **features/**: その画面でしか使わない専用コンポーネント
 
 詳細は `examples/handler-pattern.ts` を参照してください。
