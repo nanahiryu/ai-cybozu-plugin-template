@@ -1,6 +1,6 @@
 # ai-cybozu-plugin-template
 
-AIエージェントと共に、kintoneプラグインを開発するためのテンプレートプロジェクトです。
+AI エージェントと共に、kintone プラグインを開発するためのテンプレートプロジェクトです。
 
 ## セットアップ
 
@@ -22,7 +22,7 @@ PASSWORD=your-password
 
 ### 秘密鍵の生成
 
-kintoneプラグインのパッケージングに必要な秘密鍵を生成します。
+kintone プラグインのパッケージングに必要な秘密鍵を生成します。
 
 ```bash
 pnpm gen-ppk
@@ -58,9 +58,17 @@ pnpm package     # プラグインのパッケージング
 pnpm upload      # kintoneへアップロード
 ```
 
+## Claude Code / MCP 設定
+
+### Playwright MCP
+
+E2E テストの実行や kintone 画面の確認に Playwright MCP を利用できます。
+
+`.mcp.json` で設定済みのため、追加のセットアップは不要です。`.env` の認証情報を使って自動ログインします。
+
 ## プロジェクト構成
 
 詳細は `rules/guidelines` ディレクトリ内のドキュメントを参照してください。
 
-- `CLAUDE.md` - AIエージェントへの指示
+- `CLAUDE.md` - AI エージェントへの指示
 - `rules/guidelines/` - 開発ガイドライン

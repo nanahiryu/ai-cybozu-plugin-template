@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "pnpm",
+      "args": [
+        "dlx",
+        "@playwright/mcp@latest",
+        "--allowed-origins",
+        "https://*.cybozu.com",
+        "--secrets",
+        ".env"
+      ]
+    }
+  }
+}
