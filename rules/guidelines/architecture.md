@@ -23,8 +23,8 @@ src/
 - `pages` → `ui`, `hooks`
 - `infra` → `domain` のみ
 - `hooks` → `usecases`, `domain`, `infra`
-- `handlers` → `domain`, `infra`
-- `usecases` → `domain`, `infra`
+- `handlers` → `usecases`, `domain`, `infra`, `pages`
+- `usecases` → `domain`, `infra`, `pages`
 
 ## 各層の責務
 
@@ -32,11 +32,33 @@ src/
 
 #### handlers
 
-kintone イベントハンドラ（`app.record.detail.show` など）の登録のみを行う。
-UI 構築やビジネスロジック, 外部への副作用は他の層に委譲する。
+kintone イベント（`app.record.detail.show` など）に渡すハンドラ関数を定義する。
+`kintone.events.on` の呼び出し自体は Entry Point（`src/pages/desktop, mobile`等）で行う。
+
+onClick などの UI イベント処理は `usecases/` に委譲する。
 
 **注意**: プラグイン設定画面など kintone イベントを使わない画面では handlers/ は不要。
-UI コンポーネントから直接 infra/ を呼び出してよい。
+UI コンポーネント, `src/pages/config`から直接 infra/ を呼び出してよい。
+
+**具体例**:
+
+```typescript
+// src/functions/handlers/pdfPreviewHandler.tsx
+// ハンドラ関数のみを定義（kintone.events.on は呼び出さない）
+export const createPdfPreviewHandler = (pluginId: string) => {
+  return async (
+    event: RecordDetailShowEvent
+  ): Promise<RecordDetailShowEvent> => {
+    // ... handler logic
+  };
+};
+
+// src/pages/desktop/index.ts
+// Entry Point で kintone.events.on を呼び出す
+import { createPdfPreviewHandler } from "../../functions/handlers/pdfPreviewHandler";
+const PLUGIN_ID = kintone.$PLUGIN_ID;
+kintone.events.on("app.record.detail.show", createPdfPreviewHandler(PLUGIN_ID));
+```
 
 #### infra
 
@@ -68,7 +90,28 @@ domain/ と infra/ を組み合わせて呼び出すオーケストレーショ�
 注意：
 
 - ロジック実装は domain/ に委譲し、usecases/ では組み合わせのみ行う
-- 単純な処理は hooks/ や handlers/ から直接 domain/infra/ を呼んでよい
+- 単純な処理は hooks/ や handlers/ から直接 domain/, infra/ を呼んでよい
+
+**具体例**:
+
+```typescript
+// src/functions/usecases/showPdfPreview.tsx
+// onClick から呼び出されるヘビーな処理
+export const showPdfPreview = async (fileKey: string): Promise<void> => {
+  const blob = await downloadFile(fileKey); // infra
+  const blobUrl = URL.createObjectURL(blob);
+
+  try {
+    const dialogEl = document.createElement("div");
+    const root = createRoot(dialogEl);
+    root.render(<PdfViewer url={blobUrl} />); // components
+
+    kintone.createDialog(dialogEl, "PDF Preview");
+  } finally {
+    URL.revokeObjectURL(blobUrl); // cleanup
+  }
+};
+```
 
 ### hooks
 
@@ -94,5 +137,3 @@ onClick などの UI イベント処理は基本的には記載せず、props �
 
 - **ui/**: 他の画面でも使い回せる汎用コンポーネント
 - **features/**: その画面でしか使わない専用コンポーネント
-
-詳細は `examples/handler-pattern.ts` を参照してください。
