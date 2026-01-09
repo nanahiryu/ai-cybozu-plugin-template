@@ -19,7 +19,7 @@ jobs:
       - run: pnpm install
       - run: pnpm lint
 
-  test:
+  test-unit:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -31,4 +31,28 @@ jobs:
           node-version: "20"
           cache: "pnpm"
       - run: pnpm install
-      - run: pnpm test
+      - run: pnpm test:unit
+
+  test-e2e:
+    runs-on: ubuntu-latest
+    if: ${{ vars.E2E_ENABLED == 'true' }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 10
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+          cache: "pnpm"
+      - run: pnpm install
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm test:e2e
+        env:
+          BASE_URL: ${{ secrets.BASE_URL }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          SPACE_ID: ${{ secrets.SPACE_ID }}
+          THREAD_ID: ${{ secrets.THREAD_ID }}
+          APP_ID: ${{ secrets.APP_ID }}
+          PLUGIN_ID: ${{ secrets.PLUGIN_ID }}

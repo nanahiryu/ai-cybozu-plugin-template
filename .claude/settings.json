@@ -39,6 +39,8 @@
       "Bash(gh pr list:*)",
       "Bash(gh pr view:*)",
       "Bash(gh pr create:*)",
+      "Bash(gh secret set:*)",
+      "Bash(gh variable set:*)",
 
       "WebFetch",
       "WebSearch",

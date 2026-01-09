@@ -54,6 +54,27 @@ pnpm gen-ppk
 pnpm build
 ```
 
+### 5. GitHub Secrets への環境変数登録（任意）
+
+CI で E2E テストを実行したい場合、`.env` の内容を GitHub Secrets に登録します。
+
+ユーザーに GitHub Secrets への登録を行うか確認してください。
+希望する場合、以下のコマンドを実行します：
+
+```sh
+# E2Eテストを有効化（Repository Variables）
+gh variable set E2E_ENABLED --body "true"
+
+# 環境変数をSecretsに登録
+gh secret set BASE_URL --body "<.envのBASE_URL値>"
+gh secret set USERNAME --body "<.envのUSERNAME値>"
+gh secret set PASSWORD --body "<.envのPASSWORD値>"
+```
+
+※ `.env` ファイルから値を読み取り、上記コマンドを実行してください
+※ `SPACE_ID`, `THREAD_ID`, `APP_ID`, `PLUGIN_ID` は E2E テスト内容に応じて必要であれば追加
+※ `E2E_ENABLED` が `true` でない場合、CI では E2E テストはスキップされます
+
 ## 完了メッセージ
 
 セットアップ完了後、以下を案内してください：
