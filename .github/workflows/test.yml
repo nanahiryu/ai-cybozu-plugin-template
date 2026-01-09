@@ -19,7 +19,7 @@ jobs:
       - run: pnpm install
       - run: pnpm lint
 
-  test-unit:
+  test-vitest:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
