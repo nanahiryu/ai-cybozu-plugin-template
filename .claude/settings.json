@@ -3,7 +3,6 @@
   "permissions": {
     "allow": [
       "Bash(pnpm test:*)",
-      "Bash(pnpm test:e2e)",
       "Bash(pnpm test:unit:*)",
       "Bash(pnpm vitest:*)",
       "Bash(pnpm exec tsc --noEmit)",
@@ -23,9 +22,15 @@
 
       "Bash(ls -la:*)",
       "Bash(pwd)",
+      "Bash(mkdir:*)",
+      "Bash(cat:*)",
+
+      "Write",
+      "Edit",
 
       "Bash(git stash push:*)",
       "Bash(git stash pop)",
+      "Bash(git push:*)",
 
       "Bash(gh issue view:*)",
       "Bash(gh issue list:*)",
@@ -33,6 +38,7 @@
       "Bash(gh issue close:*)",
       "Bash(gh pr list:*)",
       "Bash(gh pr view:*)",
+      "Bash(gh pr create:*)",
 
       "WebFetch",
       "WebSearch",
