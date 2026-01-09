@@ -1,17 +1,32 @@
 ---
 description: issue ベースで実装用のプランを行うコマンド
+argument-hint: <issue番号>
 ---
 
-# /create-plan - kintone プラグイン開発計画
+# /create-plan - issue ベースで実装用のプランを行う
 
-> このファイルは `@rules/commands/create-plan.md` の内容を参照しています。
-> コマンド内容の更新は実体ファイルで行ってください。
-
-実体ファイルパス: @rules/commands/create-plan.md
+issue ベースで実装用のプランを行うコマンド
 
 ---
 
-## タスク
+## 入力
 
-このコマンドは、issue ベースで実装用のプランを行うコマンドです。
-詳細な手順は実体ファイルを参照してください。
+- issue 番号が 1 つ以上渡されます
+
+## 出力
+
+計画は `.working/PLAN_{yyyymmdd}_{hhmmss}.md` に出力してください。
+
+## 実行タスク
+
+### issue の内容を確認
+
+- issue の内容を確認してください
+
+```sh
+gh issue view <issue-number>
+```
+
+### 実行する流れを整理し、実装のプランを行なってください
+
+- issue の内容を確認しつつ、依存関係を整理し、実行する流れを整理してください
