@@ -9,6 +9,14 @@ description: |
 
 # テスト設計ガイド
 
+## E2Eテスト実装タイミング
+
+**重要**: E2Eテストは事前にskip状態で実装するのではなく、**ハンドラ実装完了後に段階的に実装・実行**する。
+
+```
+ハンドラ実装 → レビュー完了 → E2Eテスト実装 → E2Eテスト実行
+```
+
 ## 参照すべき仕様書
 
 テスト設計の前に `docs/spec/` 配下の仕様書を確認:
@@ -23,8 +31,7 @@ description: |
 
 `docs/spec/test-spec.md` に出力
 
-FYI.
-テンプレート: [templates/test-spec.md](templates/test-spec.md)
+FYI. テンプレート: [templates/test-spec.md](templates/test-spec.md)
 
 ## E2E テスト設計のベストプラクティス
 
@@ -49,28 +56,10 @@ FYI.
 
 ### 重要ポイント
 
-- テストコードは常に通る状態を維持
-- 未実装のテストは `test.describe.skip()` でスキップ
 - id, class は変更される可能性が高いため使用を避ける
 - kintone 標準機能はテスト対象外
-
-### skip の使い方
-
-```typescript
-// 実装前
-test.describe.skip("プラグイン設定画面", () => {
-  test("設定が保存される", async ({ page }) => {
-    // テストコード
-  });
-});
-
-// 実装後 - .skip を削除
-test.describe("プラグイン設定画面", () => {
-  test("設定が保存される", async ({ page }) => {
-    // テストコード
-  });
-});
-```
+- `waitForLoadState("networkidle")` は使用しない（タイムアウトの原因）
+- `waitForLoadState("load")` を使用する
 
 ## Playwright MCP の活用
 
