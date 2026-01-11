@@ -2,7 +2,7 @@
  * kintone アプリのフィールド情報を取得するスクリプト
  *
  * 使用方法:
- *   pnpm exec tsx scripts/get-form-fields.ts <appId>
+ *   pnpm exec tsx .claude/skills/design-kintone-plugin/scripts/get-form-fields.ts <appId>
  *
  * 必要な環境変数 (.env):
  *   - BASE_URL: kintone の URL (例: https://example.cybozu.com)
@@ -10,7 +10,7 @@
  *   - PASSWORD: kintone のパスワード
  *
  * 例:
- *   pnpm exec tsx scripts/get-form-fields.ts 123
+ *   pnpm exec tsx .claude/skills/design-kintone-plugin/scripts/get-form-fields.ts 123
  */
 
 import dotenv from "dotenv";
@@ -55,8 +55,8 @@ const getFormFields = async (
     }
 
     if (!appId) {
-      console.error("使用方法: pnpm exec tsx scripts/get-form-fields.ts <appId>");
-      console.error("例: source .env && pnpm exec tsx scripts/get-form-fields.ts 123");
+      console.error("使用方法: pnpm exec tsx .claude/skills/design-kintone-plugin/scripts/get-form-fields.ts <appId>");
+      console.error("例: pnpm exec tsx .claude/skills/design-kintone-plugin/scripts/get-form-fields.ts 123");
       process.exit(1);
     }
 
