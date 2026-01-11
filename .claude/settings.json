@@ -45,9 +45,7 @@
       "WebFetch",
       "WebSearch",
 
-      "mcp__playwright__*",
-
-      "Skill(qa)"
+      "mcp__playwright__*"
     ],
     "deny": [
       "Bash(rm :*)",
