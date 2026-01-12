@@ -31,24 +31,11 @@ description: GitHub Issue 作成支援を行うコマンド
 
 ## テンプレート
 
-@rules/template/issue.md
-
-## ラベル
-
-- `layer:domain` / `layer:infra` / `layer:handler` / `layer:ui`
-- `type:feature` / `type:bug` / `type:test`
-- `priority:high` / `priority:medium` / `priority:low`
-
-## 開発フロー
-
-```
-Issue選択 → ブランチ作成 → 実装 → テスト → PR作成（Closes #XX）→ マージ
-```
+@.github/ISSUE_TEMPLATE.md
 
 ## チェックリスト
 
 - [ ] タイトルが簡潔でわかりやすい
-- [ ] Acceptance Criteria が明確
+- [ ] 完了条件が明確
 - [ ] 1 日以内で完了できる粒度
 - [ ] 依存関係が整理されている
-- [ ] 適切なラベルが付いている
