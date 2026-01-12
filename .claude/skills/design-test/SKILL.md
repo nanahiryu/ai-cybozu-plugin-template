@@ -7,7 +7,35 @@ description: |
   WHEN NOT: 仕様書作成時、プラグイン設定時、コードレビュー時
 ---
 
-# テスト設計ガイド
+# /design-test - テスト設計
+
+E2Eテストの設計（テスト仕様書作成）を行う。
+
+**注意**: このコマンドは「設計」のみを行う。E2Eテストの実装は `/do-plan` フローで行う。
+
+## 手順
+
+### Step 1: 仕様書の確認
+
+`docs/spec/` 配下の仕様書を確認:
+
+- `docs/spec/concept.md` - プラグイン概要
+- `docs/spec/kintone-app.md` - kintone アプリ設計
+- `docs/spec/plugin-config.md` - プラグイン設定
+- `docs/spec/requirements.md` - 要件定義
+- `docs/spec/usecases/*.md` - ユースケース詳細
+
+### Step 2: E2E テスト設計
+
+- `docs/spec/test-spec.md` を作成
+- プラグイン設定による分岐を考慮
+- テスト実行時間の最適化を意識
+
+## 出力
+
+`docs/spec/test-spec.md`
+
+FYI. テンプレート: [templates/test-spec.md](templates/test-spec.md)
 
 ## E2Eテスト実装タイミング
 
@@ -16,22 +44,6 @@ description: |
 ```
 ハンドラ実装 → レビュー完了 → E2Eテスト実装 → E2Eテスト実行
 ```
-
-## 参照すべき仕様書
-
-テスト設計の前に `docs/spec/` 配下の仕様書を確認:
-
-- `docs/spec/concept.md` - プラグイン概要
-- `docs/spec/kintone-app.md` - kintone アプリ設計
-- `docs/spec/plugin-config.md` - プラグイン設定
-- `docs/spec/requirements.md` - 要件定義
-- `docs/spec/usecases/*.md` - ユースケース詳細
-
-## テスト仕様書の出力
-
-`docs/spec/test-spec.md` に出力
-
-FYI. テンプレート: [templates/test-spec.md](templates/test-spec.md)
 
 ## E2E テスト設計のベストプラクティス
 

@@ -7,7 +7,35 @@ description: |
   WHEN NOT: 実装中、テスト実行時、コードレビュー時
 ---
 
-# kintone プラグイン設計ガイド
+# /create-spec - kintone プラグイン仕様書作成
+
+kintone プラグインの仕様書を作成する。
+
+## 手順
+
+### Step 1: kintone アプリ構成の取得
+
+1. 既存のアプリを利用するか質問する
+2. 既存アプリを利用する場合:
+   - ユーザーに `.env` ファイル設定を確認
+   - フィールド情報を取得:
+   ```bash
+   pnpm exec tsx .claude/skills/design-kintone-plugin/scripts/get-form-fields.ts <appId>
+   ```
+
+**必要な環境変数**: `BASE_URL`, `USERNAME`, `PASSWORD`
+
+### Step 2: ヒアリング
+
+不足している情報をヒアリングする:
+
+- ユースケース: "{user} が {action} することができる" 形式で整理
+- 前提条件: モバイル対応、多言語対応など
+- 外部連携: 利用する外部 API やライブラリ
+
+### Step 3: 設計
+
+下記の設計手順に沿って仕様書を作成し、`docs/spec/` に出力。
 
 ## 仕様書の出力先
 
@@ -30,16 +58,6 @@ description: |
 | [kintone-app.md](templates/kintone-app.md) | アプリのフィールド設計 |
 | [plugin-config.md](templates/plugin-config.md) | プラグイン設定・Proxy設定 |
 | [usecase-detail.md](templates/usecase-detail.md) | ユースケースごとの詳細 |
-
-## kintone アプリ情報取得
-
-既存アプリのフィールド情報を取得する場合：
-
-```bash
-pnpm exec tsx .claude/skills/design-kintone-plugin/scripts/get-form-fields.ts <appId>
-```
-
-**必要な環境変数**: `BASE_URL`, `USERNAME`, `PASSWORD`
 
 ## 設計手順
 

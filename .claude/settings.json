@@ -20,10 +20,10 @@
       "Bash(git switch:*)",
       "Bash(git restore:*)",
 
-      "Bash(ls -la:*)",
+      "Bash(ls *)",
       "Bash(pwd)",
-      "Bash(mkdir:*)",
-      "Bash(cat:*)",
+      "Bash(mkdir *)",
+      "Bash(cat *)",
 
       "Write",
       "Edit",
