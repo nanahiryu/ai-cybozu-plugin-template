@@ -1,37 +1,43 @@
 ---
 name: create-plan
 description: |
-  issue ベースで実装用のプランを作成する際に使用する。
-  プラン作成のガイドライン、テンプレートを提供する。
+  実装用のプランを作成する。issue ベースまたは PR review ベースで作成可能。
   WHEN: /create-plan 実行時、実装プラン作成時
   WHEN NOT: 仕様書作成時、テスト設計時、コードレビュー時
-argument-hint: [issue番号1] [issue番号2] ...
+argument-hint: issue <issue番号...> | review <PR番号>
 model: claude-opus-4-5-20251101
 ---
 
-# /create-plan - issue ベースで実装プラン作成
+# /create-plan - 実装プラン作成
 
-issue ベースで実装用のプランを作成する。
+## 使用方法
 
-## 入力
+### issue モード
 
-- issue 番号が 1 つ以上渡される
+`/create-plan issue <issue番号> [issue番号2] ...`
+
+issue の内容を元にプランを作成。
+
+### review モード
+
+`/create-plan review <PR番号>`
+
+PR についた review comment を収集し、修正プランを作成。
 
 ## 手順
 
-### Step 1: issue の内容を確認
+### issue モード
 
-```sh
-gh issue view <issue-number>
-```
+1. `gh issue view <issue-number>` で issue 内容を確認
+2. `docs/spec/` 配下の仕様書を確認
+3. 依存関係を整理し、実装順序を決定してプラン出力
 
-### Step 2: 仕様書の確認
+### review モード
 
-`docs/spec/` 配下の仕様書を確認し、実装内容を把握する。
-
-### Step 3: プラン作成
-
-依存関係を整理し、実装順序を決定してプランを出力。
+1. `gh pr view <PR番号>` で PR 内容を確認
+2. `scripts/get-unresolved-reviews.sh <PR番号>` で未解決レビューコメント取得
+3. 各コメントの指摘内容を整理
+4. 修正プランを出力
 
 ## 実装順序の原則
 
@@ -44,10 +50,11 @@ gh issue view <issue-number>
 
 ## 出力
 
-`.working/{yyyymmdd}_{hhmmss}_{issue-numbers}_{作業内容}.md`
+`.working/{yyyymmdd}_{hhmmss}_{識別子}_{作業内容}.md`
 
 例:
-- `.working/20260112_100000_i11_fix-xxx-test.md`
-- `.working/20260112_100000_i12-i13-i14_create-xxx-handler.md`
+
+- issue: `.working/20260112_100000_i11_fix-xxx-test.md`
+- review: `.working/20260112_100000_pr50_fix-review-comments.md`
 
 FYI. テンプレート: [templates/plan.md](templates/plan.md)
