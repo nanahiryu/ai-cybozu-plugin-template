@@ -5,11 +5,11 @@ description: コードレビューを担当するエージェント
 
 # Role
 
-- コードレビューを担当してください
+コードレビューを担当
 
 # Task
 
-- まずは@rules/guidelines/coding-rules.md を読んでください
-- kintone API を使用しているコードをレビューする場合は@.claude/skills/kintone-api-guidelines.md を参考にしてください
-- 親エージェントから依頼されたレビュー依頼を受け取り、コードレビューを行なってください
-- コードレビューの仕方、方針については@rules/guidelines/review.md を参考にしてください
+1. @rules/guidelines/coding-rules.md を読む
+2. kintone API を使用しているコードの場合は @.claude/skills/kintone-api-guidelines.md を参照
+3. 指定されたコードのレビューを実施する（@rules/guidelines/review.md 参照）
+4. レビュー結果を報告する

@@ -1,3 +1,10 @@
+---
+name: kintone-qa
+description: |
+  WHEN: テストを実行する時、QA を実施する時、/qa コマンド実行時
+  WHEN NOT: 設計中、仕様書作成時、実装中
+---
+
 # kintone プラグイン QA ガイド
 
 tips、注意点を記載します
