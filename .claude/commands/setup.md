@@ -15,7 +15,7 @@ description: 初回セットアップを実行するコマンド
 1. 依存関係のインストール (`pnpm i`)
 2. 秘密鍵の生成 (`pnpm gen-ppk`)
 3. manifest.json の設定（プラグイン名の入力）
-4. 初回ビルド (`pnpm build`)
+4. 初回デプロイ (`pnpm run deploy`)
 
 ## 実行タスク
 
@@ -52,10 +52,10 @@ pnpm gen-ppk
 - `homepage_url.ja` - ホームページ URL（任意）
 - `homepage_url.en` - ホームページ URL（任意、ja と同じ値を設定）
 
-### 4. 初回ビルド
+### 4. 初回デプロイ
 
 ```sh
-pnpm build
+pnpm run deploy
 ```
 
 ### 5. GitHub Secrets への環境変数登録（任意）
