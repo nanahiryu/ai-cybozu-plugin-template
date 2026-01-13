@@ -2,6 +2,8 @@
   "enableAllProjectMcpServers": true,
   "permissions": {
     "allow": [
+      "Bash(pnpm i)",
+      "Bash(pnpm gen-ppk)",
       "Bash(pnpm test:*)",
       "Bash(pnpm test:unit:*)",
       "Bash(pnpm vitest:*)",

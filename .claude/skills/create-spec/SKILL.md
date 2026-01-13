@@ -1,5 +1,5 @@
 ---
-name: design-kintone-plugin
+name: create-spec
 description: |
   kintone プラグインの仕様書を設計する際に使用する。
   仕様書テンプレート構造、kintone アプリ設計、プラグイン設定の定義方法を提供する。
@@ -20,7 +20,7 @@ kintone プラグインの仕様書を作成する。
    - ユーザーに `.env` ファイル設定を確認
    - フィールド情報を取得:
    ```bash
-   pnpm exec tsx .claude/skills/design-kintone-plugin/scripts/get-form-fields.ts <appId>
+   pnpm exec tsx .claude/skills/create-spec/scripts/get-form-fields.ts <appId>
    ```
 
 **必要な環境変数**: `BASE_URL`, `USERNAME`, `PASSWORD`
@@ -51,13 +51,13 @@ kintone プラグインの仕様書を作成する。
 
 各仕様書のテンプレートは [templates/](templates/) を参照。
 
-| テンプレート | 用途 |
-|------------|------|
-| [concept.md](templates/concept.md) | 経緯・背景・コンセプト・前提条件 |
-| [requirements.md](templates/requirements.md) | 想定ユーザーと要件 |
-| [kintone-app.md](templates/kintone-app.md) | アプリのフィールド設計 |
-| [plugin-config.md](templates/plugin-config.md) | プラグイン設定・Proxy設定 |
-| [usecase-detail.md](templates/usecase-detail.md) | ユースケースごとの詳細 |
+| テンプレート                                     | 用途                             |
+| ------------------------------------------------ | -------------------------------- |
+| [concept.md](templates/concept.md)               | 経緯・背景・コンセプト・前提条件 |
+| [requirements.md](templates/requirements.md)     | 想定ユーザーと要件               |
+| [kintone-app.md](templates/kintone-app.md)       | アプリのフィールド設計           |
+| [plugin-config.md](templates/plugin-config.md)   | プラグイン設定・Proxy 設定       |
+| [usecase-detail.md](templates/usecase-detail.md) | ユースケースごとの詳細           |
 
 ## 設計手順
 
@@ -76,18 +76,18 @@ FYI. [templates/kintone-app.md](templates/kintone-app.md)
 
 ### 2. プラグイン設定のデータ構造を決定
 
-- 機密データ（API token等）は proxyConfig に格納
-- 参照: [外部API実行](https://cybozu.dev/ja/kintone/docs/js-api/plugins/kintone-plug-in-proxy/)
+- 機密データ（API token 等）は proxyConfig に格納
+- 参照: [外部 API 実行](https://cybozu.dev/ja/kintone/docs/js-api/plugins/kintone-plug-in-proxy/)
 
 FYI. [templates/plugin-config.md](templates/plugin-config.md)
 
 ### 3. 各ユースケースの実現方針を決定
 
-| 方針 | 用途 |
-|------|------|
-| 標準機能 | [kintone ヘルプ](https://cn.kintone.help/k/ja/) で対応可能な場合 |
-| JS API | [event handler](https://cybozu.dev/ja/kintone/docs/js-api/events/event-handling/) を利用 |
-| カスタマイズビュー | 一覧画面の自由なカスタマイズ |
+| 方針               | 用途                                                                                     |
+| ------------------ | ---------------------------------------------------------------------------------------- |
+| 標準機能           | [kintone ヘルプ](https://cn.kintone.help/k/ja/) で対応可能な場合                         |
+| JS API             | [event handler](https://cybozu.dev/ja/kintone/docs/js-api/events/event-handling/) を利用 |
+| カスタマイズビュー | 一覧画面の自由なカスタマイズ                                                             |
 
 FYI. [templates/usecase-detail.md](templates/usecase-detail.md)
 

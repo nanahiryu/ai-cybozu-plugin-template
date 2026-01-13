@@ -55,7 +55,7 @@ pnpm gen-ppk
 ### 4. 初回デプロイ
 
 ```sh
-pnpm run deploy
+pnpm run deploy -y
 ```
 
 ### 5. GitHub Secrets への環境変数登録（任意）
