@@ -16,7 +16,7 @@ pnpm install
 
 1. 仕様書を作成する(`/create-spec`)
 2. 課題を作成する(`/issue`)
-3. テストの設計と実装を行う(`/design-test`)
+3. テストの設計を行う(`/design-test`)
 4. issue ベースで実装用のプランを行う(`/plan`)
 5. 実装を行う(`/do-plan`)
 6. テスト実行を行う(`/qa`)
@@ -25,7 +25,7 @@ pnpm install
 
 1. 仕様書を作成する(`/create-spec`)
 2. 課題を作成する(`/issue`)
-3. テストの設計と実装を行う(`/design-test`)
+3. テストの設計を行う(`/design-test`)
 4. issue ベースで実装用のプランを行う(`/plan`)
 5. 実装を行う(`/do-plan`)
 6. テスト実行を行う(`/qa`)
@@ -51,16 +51,15 @@ pnpm install
 3. コミット: 課題ファイルのみ
 4. PR 作成
 
-### E2E, Integration テストを書く (`/design-test`)
+### E2E テストを設計する (`/design-test`)
 
 1. ブランチ作成: `git switch -c feature/design-test`
-2. テスト環境セットアップ
-3. Integration テスト実装（skip 状態）
-4. E2E 認証テスト実装
-5. E2E その他テスト実装（skip 状態）
-6. テスト実行
-7. コミット
-8. PR 作成
+2. 仕様書を確認
+3. テスト仕様書を作成（`docs/spec/test-spec.md`）
+4. コミット
+5. PR 作成
+
+**注意**: E2E テストの実装は `/do-plan` フローでハンドラ実装完了後に行う。
 
 ### 計画を立てる (`/plan`)
 
