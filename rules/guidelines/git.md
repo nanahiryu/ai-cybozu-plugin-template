@@ -27,6 +27,14 @@ type 例：
 FYI.
 https://www.conventionalcommits.org/ja/v1.0.0/
 
+## コマンド
+
+- `git checkout` は使用しない
+  - ブランチ切り替え・作成: `git switch` を使用
+    - 例: `git switch main`, `git switch -c feature/123-new-feature`
+  - ファイル復元: `git restore` を使用
+    - 例: `git restore src/index.ts`
+
 ## ブランチ
 
 ### ブランチ戦略
