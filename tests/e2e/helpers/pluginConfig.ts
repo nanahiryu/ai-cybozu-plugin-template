@@ -1,21 +1,11 @@
 import type { Page } from "@playwright/test";
-import dotenv from "dotenv";
-
-dotenv.config();
-
-if (!process.env.BASE_URL || !process.env.USERNAME || !process.env.PASSWORD) {
-  throw new Error("Environment variables are not set");
-}
-
-const BASE_URL = process.env.BASE_URL;
-const USERNAME = process.env.USERNAME;
-const PASSWORD = process.env.PASSWORD;
+import { ENV } from "./env";
 
 /**
  * Basic認証用のヘッダーを生成する
  */
 const createAuthHeader = (): string => {
-  return Buffer.from(`${USERNAME}:${PASSWORD}`).toString("base64");
+  return Buffer.from(`${ENV.USERNAME}:${ENV.PASSWORD}`).toString("base64");
 };
 
 /**
@@ -34,7 +24,7 @@ export const savePluginConfig = async (
 ): Promise<void> => {
   // プラグイン設定画面に遷移
   await page.goto(
-    `${BASE_URL}/k/admin/app/${appId}/plugin/config?pluginId=${pluginId}`,
+    `${ENV.BASE_URL}/k/admin/app/${appId}/plugin/config?pluginId=${pluginId}`,
   );
   await page.waitForLoadState("load");
 
@@ -59,7 +49,7 @@ export const savePluginConfig = async (
  */
 export const deployApp = async (page: Page, appId: string): Promise<void> => {
   const response = await page.request.post(
-    `${BASE_URL}/k/v1/preview/app/deploy.json`,
+    `${ENV.BASE_URL}/k/v1/preview/app/deploy.json`,
     {
       headers: {
         "X-Cybozu-Authorization": createAuthHeader(),
@@ -93,7 +83,7 @@ export const waitForDeployComplete = async (
 
   while (Date.now() - startTime < timeout) {
     const response = await page.request.get(
-      `${BASE_URL}/k/v1/preview/app/deploy.json?apps=${appId}`,
+      `${ENV.BASE_URL}/k/v1/preview/app/deploy.json?apps=${appId}`,
       {
         headers: {
           "X-Cybozu-Authorization": createAuthHeader(),
