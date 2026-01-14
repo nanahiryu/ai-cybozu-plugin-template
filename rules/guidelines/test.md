@@ -25,6 +25,11 @@
 - UI/Pages は storybook を利用し、コンポーネントの操作が意図的かを常に人間が確認できる状態に**必ず**しておく
   - storybook においても story は必要最低限にする
 
+#### Storybook の確認方法
+
+- Storybook の確認には `pnpm storybook` を利用し、ビルド（`pnpm build-storybook`）はしない
+- AI エージェントが Storybook を確認する際は Playwright MCP を利用して確認する
+
 ### hooks/
 
 - hooks/配下のカスタムフックはテストを必要としない
