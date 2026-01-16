@@ -1,5 +1,4 @@
 {
-  "enableAllProjectMcpServers": true,
   "permissions": {
     "allow": [
       "Write",
@@ -12,7 +11,6 @@
       "Bash(pnpm build)",
       "Bash(pnpm run deploy)",
       "Bash(pnpm add:*)",
-
       "Bash(pnpm test)",
       "Bash(pnpm test:unit)",
       "Bash(pnpm test:integration)",
@@ -28,15 +26,11 @@
       "Bash(git switch:*)",
       "Bash(git restore:*)",
       "Bash(git add:*)",
-
-      "Bash(ls:*)",
-      "Bash(pwd)",
-      "Bash(mkdir:*)",
-      "Bash(cat:*)",
-
       "Bash(git stash push:*)",
       "Bash(git stash pop)",
       "Bash(git push:*)",
+      "Bash(git pull:*)",
+      "Bash(git worktree:*)",
 
       "Bash(gh issue view:*)",
       "Bash(gh issue list:*)",
@@ -48,9 +42,19 @@
       "Bash(gh secret set:*)",
       "Bash(gh variable set:*)",
 
+      "Bash(ls:*)",
+      "Bash(pwd)",
+      "Bash(mkdir:*)",
+      "Bash(mv:*)",
+      "Bash(cat:*)",
+
       "mcp__playwright__*"
     ],
-    "ask": ["Read(./.env)", "Bash(rm *)", "Bash(rm -rf *)"],
-    "deny": ["Bash(curl *)", "Bash(wget *)", "Read(./secrets/**/*)"]
+    "deny": ["Bash(curl *)", "Bash(wget *)", "Read(./secrets/**/*)"],
+    "ask": ["Read(./.env)", "Bash(rm *)", "Bash(rm -rf *)"]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledPlugins": {
+    "code-simplifier@claude-plugins-official": true
   }
 }

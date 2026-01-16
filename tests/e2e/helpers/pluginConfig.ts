@@ -1,21 +1,11 @@
 import type { Page } from "@playwright/test";
-import dotenv from "dotenv";
-
-dotenv.config();
-
-if (!process.env.BASE_URL || !process.env.USERNAME || !process.env.PASSWORD) {
-  throw new Error("Environment variables are not set");
-}
-
-const BASE_URL = process.env.BASE_URL;
-const USERNAME = process.env.USERNAME;
-const PASSWORD = process.env.PASSWORD;
+import { ENV } from "./env";
 
 /**
  * Basic認証用のヘッダーを生成する
  */
 const createAuthHeader = (): string => {
-  return Buffer.from(`${USERNAME}:${PASSWORD}`).toString("base64");
+  return Buffer.from(`${ENV.USERNAME}:${ENV.PASSWORD}`).toString("base64");
 };
 
 /**
@@ -26,40 +16,40 @@ const createAuthHeader = (): string => {
  * @param pluginId プラグインID
  * @param config プラグイン設定（key-valueオブジェクト）
  */
-export const savePluginConfig = async (
+const savePluginConfig = async (
   page: Page,
   appId: string,
   pluginId: string,
-  config: Record<string, string>,
+  config: Record<string, string>
 ): Promise<void> => {
   // プラグイン設定画面に遷移
   await page.goto(
-    `${BASE_URL}/k/admin/app/${appId}/plugin/config?pluginId=${pluginId}`,
+    `${ENV.BASE_URL}/k/admin/app/${appId}/plugin/config?pluginId=${pluginId}`
   );
   await page.waitForLoadState("load");
 
   // kintone.plugin.app.setConfig() を使用して設定を保存
   await page.evaluate((cfg) => {
     return new Promise<void>((resolve, reject) => {
-      const kintone = (window as unknown as { kintone: KintoneGlobal }).kintone;
-      kintone.plugin.app.setConfig(
-        cfg,
-        () => resolve(),
-        (err: Error) => reject(err),
-      );
+      try {
+        kintone.plugin.app.setConfig(cfg, () => resolve());
+      } catch (error) {
+        reject(error);
+      }
     });
   }, config);
 };
 
 /**
- * アプリをデプロイする（プレビュー環境の変更を本番に反映）
+ * アプリ設定を運用環境に反映
+ * https://cybozu.dev/ja/kintone/docs/rest-api/apps/settings/deploy-app-settings/
  * REST API を使用
  * @param page Playwrightのページオブジェクト
  * @param appId アプリID
  */
-export const deployApp = async (page: Page, appId: string): Promise<void> => {
+const deployApp = async (page: Page, appId: string): Promise<void> => {
   const response = await page.request.post(
-    `${BASE_URL}/k/v1/preview/app/deploy.json`,
+    `${ENV.BASE_URL}/k/v1/preview/app/deploy.json`,
     {
       headers: {
         "X-Cybozu-Authorization": createAuthHeader(),
@@ -68,7 +58,7 @@ export const deployApp = async (page: Page, appId: string): Promise<void> => {
       data: {
         apps: [{ app: appId }],
       },
-    },
+    }
   );
 
   if (!response.ok()) {
@@ -78,27 +68,28 @@ export const deployApp = async (page: Page, appId: string): Promise<void> => {
 };
 
 /**
- * アプリのデプロイ完了を待機する
+ * アプリ設定の反映完了を待機する
+ * https://cybozu.dev/ja/kintone/docs/rest-api/apps/settings/get-app-deploy-status/
  * REST API を使用
  * @param page Playwrightのページオブジェクト
  * @param appId アプリID
  * @param timeout タイムアウト（ミリ秒）
  */
-export const waitForDeployComplete = async (
+const waitForDeployComplete = async (
   page: Page,
   appId: string,
-  timeout = 30000,
+  timeout = 30000
 ): Promise<void> => {
   const startTime = Date.now();
 
   while (Date.now() - startTime < timeout) {
     const response = await page.request.get(
-      `${BASE_URL}/k/v1/preview/app/deploy.json?apps=${appId}`,
+      `${ENV.BASE_URL}/k/v1/preview/app/deploy.json?apps=${appId}`,
       {
         headers: {
           "X-Cybozu-Authorization": createAuthHeader(),
         },
-      },
+      }
     );
 
     if (!response.ok()) {
@@ -135,24 +126,9 @@ export const savePluginConfigAndDeploy = async (
   page: Page,
   appId: string,
   pluginId: string,
-  config: Record<string, string>,
+  config: Record<string, string>
 ): Promise<void> => {
   await savePluginConfig(page, appId, pluginId, config);
   await deployApp(page, appId);
   await waitForDeployComplete(page, appId);
 };
-
-/**
- * kintone グローバルオブジェクトの型定義
- */
-interface KintoneGlobal {
-  plugin: {
-    app: {
-      setConfig: (
-        config: Record<string, string>,
-        onSuccess: () => void,
-        onError: (err: Error) => void,
-      ) => void;
-    };
-  };
-}
