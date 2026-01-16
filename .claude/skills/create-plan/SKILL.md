@@ -10,6 +10,10 @@ model: claude-opus-4-5-20251101
 
 # /create-plan - 実装プラン作成
 
+## 概要
+
+issue または PR review の情報を取得し、plan mode に入ってプランを作成するラッパースキル。
+
 ## 使用方法
 
 ### issue モード
@@ -30,14 +34,15 @@ PR についた review comment を収集し、修正プランを作成。
 
 1. `gh issue view <issue-number>` で issue 内容を確認
 2. `docs/spec/` 配下の仕様書を確認
-3. 依存関係を整理し、実装順序を決定してプラン出力
+3. 依存関係を整理し、実装順序を決定
+4. **plan mode に入り、テンプレートに従ってプランを作成**
 
 ### review モード
 
 1. `gh pr view <PR番号>` で PR 内容を確認
 2. `scripts/get-unresolved-reviews.sh <PR番号>` で未解決レビューコメント取得
 3. 各コメントの指摘内容を整理
-4. 修正プランを出力
+4. **plan mode に入り、テンプレートに従って修正プランを作成**
 
 ## 実装順序の原則
 
@@ -50,11 +55,13 @@ PR についた review comment を収集し、修正プランを作成。
 
 ## 出力
 
-`.working/{yyyymmdd}_{hhmmss}_{識別子}_{作業内容}.md`
+plan mode により `.plan/` ディレクトリに出力される。
+
+ファイル名形式: `{yyyymmdd}_{hhmmss}_{識別子}_{作業内容}.md`
 
 例:
 
-- issue: `.working/20260112_100000_i11_fix-xxx-test.md`
-- review: `.working/20260112_100000_pr50_fix-review-comments.md`
+- issue: `.plan/20260112_100000_i11_fix-xxx-test.md`
+- review: `.plan/20260112_100000_pr50_fix-review-comments.md`
 
-FYI. テンプレート: [templates/plan.md](templates/plan.md)
+テンプレート: [templates/plan.md](templates/plan.md)
