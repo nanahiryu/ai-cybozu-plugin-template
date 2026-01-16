@@ -1,5 +1,5 @@
 ---
-name: qa
+name: kintone-qa
 description: |
   E2Eテストの実装・実行・調査を行う総合QAスキル。
   WHEN: /qa 実行時、E2Eテスト実装時、テスト失敗調査時
@@ -10,98 +10,73 @@ description: |
 
 ## 概要
 
-e2e-tester subagent を通じて Playwright MCP を活用し、
-UI探索 -> テスト実装 -> 実行 -> 失敗調査のサイクルを回す。
+テスト仕様書を元に E2E テストを実装・実行し、品質を保証する。
+
+## フロー
+
+```
+1. テスト仕様書を元に E2E テストを実装
+    - テストの実装の際には Playwright MCP を利用して動作確認しながら実装する
+   ↓
+2. E2E テストを実行
+   ↓
+3. 失敗時の対応
+   - E2E テストの実装に問題がある → 1に戻って修正
+   - コード/仕様書の乖離 → ユーザーに報告
+```
+
+### 1. テスト実装
+
+テスト仕様書（`docs/test-spec.md` 等）を読み、E2E テストを実装する。
+
+量が多い場合は **e2e-tester subagent** を適切な粒度（ページごと等）で呼び出す。
+
+### 2. テスト実行
+
+```bash
+pnpm exec playwright test
+```
+
+### 3. 失敗時の対応
+
+| 原因                   | 対応           |
+| ---------------------- | -------------- |
+| E2E テストの実装に問題 | 1 に戻って修正 |
+| コード/仕様書の乖離    | ユーザーに報告 |
+
+**報告形式（コード/仕様書の乖離の場合）:**
+
+| テストケース                     | 失敗原因             | 実装の状態                                   |
+| -------------------------------- | -------------------- | -------------------------------------------- |
+| 「プレビューボタンが表示される」 | ボタンが見つからない | 仕様では表示されるはずだが、実装されていない |
 
 ## 呼び出し関係
 
 ```
 ユーザー
-  | /qa explore "プラグイン設定を保存する"
+  | /qa
 親エージェント
-  | qa skill読み込み -> workflows/exploration.md参照
-  | e2e-tester subagent起動
+  | テスト仕様書を読む
+  | e2e-tester subagent を適切な粒度で起動
 e2e-tester
-  | Playwright MCP使用
-  | UI探索実行
+  | Playwright MCP 使用
+  | E2E テスト実装
   | 結果を親に返却
 親エージェント
-  | ユーザーに結果報告
+  | テスト実行
+  | 結果をユーザーに報告
 ```
 
 **重要**: 親エージェントは Playwright MCP を直接使用しない。必ず e2e-tester 経由で使用する。
 
-## モード
+## E2E テストアーキテクチャ
 
-### `/qa explore <goal>`
+詳細: [rules/guidelines/architecture-e2e.md](../../../rules/guidelines/architecture-e2e.md)
 
-UI探索モード。指定したゴールに向けてUIを探索し、Playwrightコードと手順を返す。
+## Tips
 
-例:
-
-- `/qa explore "プラグイン設定を保存する"`
-- `/qa explore "レコード詳細画面でPDFプレビューボタンをクリックする"`
-
-詳細: [workflows/exploration.md](workflows/exploration.md)
-
-### `/qa implement <test-spec>`
-
-テスト実装モード。テスト仕様に基づいてE2Eテストを実装する。
-
-例:
-
-- `/qa implement "プレビューボタン表示テスト"`
-
-詳細: [workflows/test-implementation.md](workflows/test-implementation.md)
-
-### `/qa run [test-file]`
-
-テスト実行モード。E2Eテストを実行し、結果を報告する。
-
-例:
-
-- `/qa run` - 全テスト実行
-- `/qa run pdf-preview.spec.ts` - 特定ファイルのみ
-
-### `/qa investigate <error>`
-
-失敗調査モード。テスト失敗の原因をPlaywright MCPで調査する。
-
-例:
-
-- `/qa investigate "プレビューボタンが見つからない"`
-
-詳細: [workflows/failure-investigation.md](workflows/failure-investigation.md)
-
-## E2Eテストアーキテクチャ
-
-### ディレクトリ構造
-
-```
-tests/e2e/
-├── *.spec.ts           # テストケースのみ
-├── helpers/
-│   ├── env.ts          # 環境変数一元管理
-│   ├── constants.ts    # 定数管理
-│   ├── auth.ts         # ログイン処理
-│   ├── pluginConfig.ts # プラグイン設定処理
-│   ├── testData.ts     # テストデータ管理
-│   ├── pages/          # 画面内の要素取得・操作
-│   └── navigation/     # 画面遷移
-├── fixtures/           # 生成済み静的ファイル（コミット対象）
-└── scripts/            # 生成スクリプト等
-```
-
-### 守るべきルール
-
-1. **spec.tsにはテストケースのみ**: 汎用関数は helpers/ に切り出す
-2. **動的import型は使わない**: トップレベルで `import type { Page } from "@playwright/test";`
-3. **環境変数・定数は一元管理**: helpers/env.ts, helpers/constants.ts
-4. **fixtures/ と scripts/ の分離**: fixtures/はコミット対象、scripts/は生成スクリプト
-
-## 参照
-
-- [tips/guide.md](tips/guide.md) - Tips一覧
-- [workflows/exploration.md](workflows/exploration.md) - UI探索フロー
-- [workflows/test-implementation.md](workflows/test-implementation.md) - テスト実装フロー
-- [workflows/failure-investigation.md](workflows/failure-investigation.md) - 失敗調査フロー
+| ケース | 参照 |
+|--------|------|
+| プラグイン設定が反映されない | [tips/kintone/save-plugin-config.md](tips/kintone/save-plugin-config.md) |
+| テストがタイムアウトする | [tips/playwright/wait-for-load-state.md](tips/playwright/wait-for-load-state.md) |
+| 要素が見つからない | [tips/playwright/selectors.md](tips/playwright/selectors.md) |
