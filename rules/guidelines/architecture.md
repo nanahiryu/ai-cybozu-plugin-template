@@ -35,7 +35,7 @@ src/
 kintone イベント（`app.record.detail.show` など）に渡すハンドラ関数を定義する。
 `kintone.events.on` の呼び出し自体は Entry Point（`src/pages/desktop, mobile`等）で行う。
 
-onClick などの UI イベント処理は `usecases/` に委譲する。
+onClick などの UI イベント処理は `usecases/` に委譲する（handlers/ には配置しない）。
 
 **注意**: プラグイン設定画面など kintone イベントを使わない画面では handlers/ は不要。
 UI コンポーネント, `src/pages/config`から直接 infra/ を呼び出してよい。
@@ -63,6 +63,8 @@ kintone.events.on("app.record.detail.show", createPdfPreviewHandler(PLUGIN_ID));
 #### infra
 
 kintone API, その他外部 API を呼び出す関数を配置する。
+
+**重要**: `kintone` オブジェクトへのアクセスは infra/ 層に限定する。他の層で直接 `kintone` オブジェクトを参照してはならない。
 
 **ファイル構成ルール**:
 

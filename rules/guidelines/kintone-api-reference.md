@@ -62,3 +62,4 @@ declare namespace kintone {
 - dts-gen で提供される型を再定義しない
 - 型拡張が必要な場合は、最小限の範囲で行う
 - 可能な限り公式ドキュメントを参照して型を定義する
+- `declare global` は使用禁止。型拡張には `declare namespace kintone` を使用する
