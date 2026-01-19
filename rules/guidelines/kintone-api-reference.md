@@ -63,3 +63,33 @@ declare namespace kintone {
 - 型拡張が必要な場合は、最小限の範囲で行う
 - 可能な限り公式ドキュメントを参照して型を定義する
 - `declare global` は使用禁止。型拡張には `declare namespace kintone` を使用する
+
+## 他アプリ操作時のAPIトークン要件
+
+自アプリ以外のアプリに対してREST APIを実行する場合、APIトークンによる認証が必要。
+
+### 必要な設定
+
+1. **プラグイン設定画面でAPIトークンを入力させるUIを用意する**
+2. **APIトークンをプラグイン設定に保存する**
+
+### 実装例
+
+```typescript
+// プラグイン設定でAPIトークンを取得
+const config = getPluginConfig(pluginId);
+const apiToken = config.externalAppApiToken;
+
+// 他アプリへのAPIリクエスト
+const response = await kintone.api(
+  kintone.api.url("/k/v1/records.json", true),
+  "GET",
+  { app: externalAppId, query: "..." },
+  { "X-Cybozu-API-Token": apiToken }
+);
+```
+
+### 注意事項
+
+- APIトークンは機密情報のため、ログ出力やデバッグ表示に含めない
+- 複数アプリにアクセスする場合は、アプリごとにAPIトークンを管理する
