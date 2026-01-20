@@ -32,7 +32,8 @@ await expect(page.getByText("期待するテキスト")).toBeVisible();
 
 ## 固定秒数待機の禁止
 
-`waitForTimeout()` の使用は原則禁止。以下の代替手段を使用する:
+`waitForTimeout()` の使用はできるだけ避ける。(やむなく使用する場合は理由をNOTE: としてコメントで記載する)
+以下の代替手段を推奨する:
 
 ```typescript
 // NG - 固定秒数待機
