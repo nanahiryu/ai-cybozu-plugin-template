@@ -8,6 +8,8 @@ description: |
 
 ルール・テンプレート・スキルへのフィードバックを Issue 化する。
 
+**対象リポジトリ**: `nanahiryu/ai-cybozu-plugin-template`
+
 ## 手順
 
 ### Step 1: フィードバック内容のヒアリング
@@ -20,7 +22,11 @@ description: |
 
 ### Step 2: Issue 作成
 
-`gh issue create` コマンドで Issue を作成。
+`gh issue create` コマンドで Issue を作成:
+
+```bash
+gh issue create --repo nanahiryu/ai-cybozu-plugin-template --title "..." --body "..."
+```
 
 ## テンプレート
 
