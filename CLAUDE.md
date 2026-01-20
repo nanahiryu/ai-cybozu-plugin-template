@@ -5,7 +5,24 @@
 
 ## 最初に読むべきドキュメント
 
-- `rules/guidelines`
+### Tier 1: 常時参照（必須）
+
+以下のドキュメントは常に参照すること:
+
+- `rules/guidelines/architecture.md` - アーキテクチャ
+- `rules/guidelines/coding-rules.md` - コーディング規約
+- `rules/guidelines/develop-flow.md` - 開発フロー
+- `rules/guidelines/git.md` - Git運用ルール
+
+### Tier 2: 作業時参照
+
+以下は該当作業時に参照:
+
+- `rules/guidelines/test.md` - テスト実装時
+- `rules/guidelines/architecture-e2e.md` - E2Eテスト時
+- `rules/guidelines/kintone-api-reference.md` - API実装時
+- `rules/guidelines/i18n.md` - 文言追加時
+- `rules/guidelines/review.md` - レビュー時
 
 ## ドキュメント記載のルール
 

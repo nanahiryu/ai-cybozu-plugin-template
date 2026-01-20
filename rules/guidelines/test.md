@@ -7,6 +7,7 @@
 - plugin の性質上、api は既に用意されているものを利用するため、特殊なケースを除いて infra/のテストをしない
 - テストコードは実装ファイルと同じディレクトリに配置する
 - メンテナンスしやすいように必要最小限のテストを実装することを意識する
+- テストケースのタイトル（describe, it の第一引数）は日本語で記載する
 
 ### Domain 層
 
@@ -17,6 +18,7 @@
 
 - ハンドラに対して正常系を少なくとも一つ書く
 - infra/はモックを使用することとする
+- `kintone` オブジェクトを直接モックせず、infra/ 層をモックする
 
 ### UI/Pages 層
 
@@ -39,18 +41,17 @@
 
 - kintone 標準の機能についてはテストしないことを意識する
 - テストコードは id, class は変更される可能性が高いため、テストコード内では使用しないことを意識する
+- `waitForTimeout()` の使用はできるだけ避ける（やむなく使用する場合は理由を NOTE: としてコメントで記載する）
 
 #### 環境変数の読み込み
 
-テストヘルパーや config では必ず以下を実装:
+環境変数の読み込みには `tests/e2e/helpers/env.ts` を使用する:
 
 ```typescript
-import dotenv from "dotenv";
-dotenv.config();
+import { env } from "../helpers/env";
 
-if (!process.env.BASE_URL || !process.env.USERNAME || !process.env.PASSWORD) {
-  throw new Error("Environment variables are not set");
-}
+// 使用例
+const baseUrl = env.BASE_URL;
 ```
 
 #### kintone ログインの実装

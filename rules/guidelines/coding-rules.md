@@ -16,6 +16,7 @@
 
 - UI は必ず tsx ファイルで定義する
 - inline での React コンポーネント作成を禁止
+- UI コンポーネントには必ず Storybook を追加する
 
 ### useEffect の利用
 
