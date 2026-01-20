@@ -71,25 +71,32 @@ declare namespace kintone {
 ### 必要な設定
 
 1. **プラグイン設定画面でAPIトークンを入力させるUIを用意する**
-2. **APIトークンをプラグイン設定に保存する**
+2. **APIトークンは proxyConfig に保存する**（機密データのため pluginConfig は使用しない）
 
 ### 実装例
 
 ```typescript
-// プラグイン設定でAPIトークンを取得
-const config = getPluginConfig(pluginId);
-const apiToken = config.externalAppApiToken;
-
-// 他アプリへのAPIリクエスト
-const response = await kintone.api(
-  kintone.api.url("/k/v1/records.json", true),
+// 設定保存時: proxyConfig にAPIトークンを保存
+kintone.plugin.app.setProxyConfig(
+  "https://{subdomain}.cybozu.com/k/v1/records.json",
   "GET",
-  { app: externalAppId, query: "..." },
-  { "X-Cybozu-API-Token": apiToken }
+  { "X-Cybozu-API-Token": apiToken },
+  {},
+  pluginId
+);
+
+// API実行時: kintone.plugin.app.proxy を使用
+const response = await kintone.plugin.app.proxy(
+  pluginId,
+  "https://{subdomain}.cybozu.com/k/v1/records.json",
+  "GET",
+  {},
+  { app: externalAppId, query: "..." }
 );
 ```
 
 ### 注意事項
 
-- APIトークンは機密情報のため、ログ出力やデバッグ表示に含めない
+- APIトークンは機密情報のため、proxyConfig を使用し pluginConfig には保存しない
+- ログ出力やデバッグ表示に含めない
 - 複数アプリにアクセスする場合は、アプリごとにAPIトークンを管理する
