@@ -46,7 +46,6 @@ kintone プラグインの仕様書を作成する。
 - `kintone-app.md` - アプリ設計
 - `plugin-config.md` - プラグイン設定
 - `usecases/{name}.md` - ユースケース詳細
-- `implementation-guide.md` - 実装順序・方向性
 
 ## テンプレート
 
@@ -59,7 +58,6 @@ kintone プラグインの仕様書を作成する。
 | [kintone-app.md](templates/kintone-app.md)       | アプリのフィールド設計           |
 | [plugin-config.md](templates/plugin-config.md)   | プラグイン設定・Proxy 設定       |
 | [usecase-detail.md](templates/usecase-detail.md) | ユースケースごとの詳細           |
-| [implementation-guide.md](templates/implementation-guide.md) | 実装順序・方向性                 |
 
 ## 設計手順
 
@@ -98,14 +96,6 @@ FYI. [templates/usecase-detail.md](templates/usecase-detail.md)
 - handler を実装すると考えた際に、関数に分離する単位で処理の流れを記載
 
 FYI. [templates/usecase-detail.md](templates/usecase-detail.md)
-
-### 5. 実装順序・方向性を決定
-
-- 実装するファイルの順序を決定
-- 技術的な判断事項を文書化
-- 依存関係を整理
-
-FYI. [templates/implementation-guide.md](templates/implementation-guide.md)
 
 ## kintone API 参照
 
