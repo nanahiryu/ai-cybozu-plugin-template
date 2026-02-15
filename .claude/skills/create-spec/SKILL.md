@@ -99,4 +99,4 @@ FYI. [templates/usecase-detail.md](templates/usecase-detail.md)
 
 ## kintone API 参照
 
-型定義・API 仕様は @rules/guidelines/kintone-api-reference.md を参照。
+型定義・API 仕様は @.claude/rules/kintone-api-reference.md を参照。
