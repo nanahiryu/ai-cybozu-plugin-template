@@ -68,7 +68,7 @@ E2E テストの実行や kintone 画面の確認に Playwright MCP を利用で
 
 ## プロジェクト構成
 
-詳細は `rules/guidelines` ディレクトリ内のドキュメントを参照してください。
+詳細は `.claude/rules/` ディレクトリ内のドキュメントを参照してください。
 
 - `CLAUDE.md` - AI エージェントへの指示
-- `rules/guidelines/` - 開発ガイドライン
+- `.claude/rules/` - 開発ガイドライン

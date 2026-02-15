@@ -71,7 +71,7 @@ e2e-tester
 
 ## E2E テストアーキテクチャ
 
-詳細: [rules/guidelines/architecture-e2e.md](../../../rules/guidelines/architecture-e2e.md)
+詳細: [.claude/rules/architecture-e2e.md](../../rules/architecture-e2e.md)
 
 ## Tips
 

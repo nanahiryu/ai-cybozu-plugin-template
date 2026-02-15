@@ -64,7 +64,7 @@ FYI. テンプレート: [templates/test-spec.md](templates/test-spec.md)
 
 ## E2E テスト実装ガイドライン
 
-詳細は `rules/guidelines/test.md` を参照。
+詳細は `.claude/rules/test.md` を参照。
 
 ### 重要ポイント
 

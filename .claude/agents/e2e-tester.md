@@ -18,4 +18,4 @@ E2Eテストの実装・実行を担当
 
 - @.claude/skills/design-test/SKILL.md - テスト設計ガイド
 - @.claude/skills/kintone-qa.md - kintone QA Tips
-- @rules/guidelines/test.md - テスト方針（E2E部分）
+- @.claude/rules/test.md - テスト方針（E2E部分）
